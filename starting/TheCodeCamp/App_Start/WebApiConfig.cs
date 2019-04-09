@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Microsoft.Web.Http;
 using Newtonsoft.Json.Serialization;
 
 namespace TheCodeCamp
@@ -12,6 +13,14 @@ namespace TheCodeCamp
         {
             // Web API configuration and services
             AutofacConfig.Register();
+
+
+            config.AddApiVersioning(cfg =>
+            {
+                cfg.DefaultApiVersion = new Microsoft.Web.Http.ApiVersion(1, 1);
+                cfg.AssumeDefaultVersionWhenUnspecified = true;
+                cfg.ReportApiVersions = true;
+            });
 
             // change json case 
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver =
